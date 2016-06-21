@@ -5,7 +5,6 @@ class OrganizationCampaignsController < ApplicationController
   def show
     @recipients = @organization_campaign.recipients
     @donors = @organization_campaign.organization.memberships
-    @match = Match.new
   end
 
   private

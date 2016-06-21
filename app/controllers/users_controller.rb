@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @memberships = current_user.memberships
-    if @memberships && @memberships.first.matches
+    if false # @memberships && @memberships.first.matches
       @campaign_date = @memberships.first.matches.first.recipient.organization_campaign.campaign.donation_deadline
     else
       @campaign_date = Date.today
