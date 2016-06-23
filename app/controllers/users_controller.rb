@@ -6,9 +6,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    @memberships = current_user.memberships
-    if false # @memberships && @memberships.first.matches
-      @campaign_date = @memberships.first.matches.first.recipient.organization_campaign.campaign.donation_deadline
+    @memberships = current_user.memberships.includes(recipients: { organization_campaign: :campaign })
+    if !@memberships.empty?
+      # TODO: I'd like to clean this up
+      @campaign_date = @memberships.first.recipients.first.organization_campaign.campaign.donation_deadline
     else
       @campaign_date = Date.today
     end

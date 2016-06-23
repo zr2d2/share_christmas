@@ -3,6 +3,10 @@ class OrganizationCampaignsController < ApplicationController
   before_action :authenticate_user!
 
   def show
+    @membership = Membership.where(
+      organization_id: @organization_campaign.id,
+      user_id: current_user.id
+    ).first
     @recipients = @organization_campaign.recipients
     @donors = @organization_campaign.organization.memberships
   end
